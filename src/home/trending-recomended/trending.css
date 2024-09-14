@@ -1,0 +1,10 @@
+/* 
+.slick-slide {
+ /* margin: 10px;  */
+/* } */
+
+.slick-track {
+  display: flex;
+  gap: 10px;
+  /* margin-left: -10px; */
+}
