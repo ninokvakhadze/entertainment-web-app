@@ -43,6 +43,9 @@ const SignUpDiv = styled.div`
   display: flex;
   flex-direction: column;
   gap: 25px;
+  @media screen and (min-width: 768px){
+    width: 50%;
+  }
 `;
 
 const Title = styled.h2`
@@ -98,6 +101,7 @@ const Button = styled.button`
   font-weight: 400;
   line-height: 19px;
   letter-spacing: 0px;
+  margin: auto;
   margin-top: 10px;
   cursor: pointer;
   &:hover {

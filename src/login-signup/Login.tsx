@@ -77,6 +77,9 @@ const LoginDiv = styled.div`
   display: flex;
   flex-direction: column;
   gap: 25px;
+  @media screen and (min-width: 768px){
+    width: 50%;
+  }
 `;
 
 const Title = styled.h2`
@@ -134,6 +137,7 @@ const Button = styled.button`
   letter-spacing: 0px;
   margin-top: 10px;
   cursor: pointer;
+  margin: auto;
   &:hover {
     background-color: white;
     color: black;

@@ -62,6 +62,9 @@ const HeaderDiv = styled.div`
   justify-content: space-between;
   padding: 5px 16px;
   align-items: center;
+  @media screen and (min-width: 768px){
+    border-radius: 12px;
+  }
 `;
 
 const NavDiv = styled.div`

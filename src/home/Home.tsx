@@ -20,5 +20,5 @@ const Home: React.FC<HomeProps> = ({ data, search }) => {
 export default Home;
 
 const HomeDiv = styled.div`
-  padding: 10px;
+  /* padding: 10px; */
 `;

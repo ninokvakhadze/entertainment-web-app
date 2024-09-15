@@ -14,10 +14,18 @@ interface TrendingProps {
 const settings = {
   speed: 500,
   infinite: false,
-  slidesToShow: 1.5,
+  slidesToShow: 2.5,
   slidesToScroll: 1,
   rows: 1,
   arrows: false,
+  responsive: [
+    {
+      breakpoint: 1024, 
+      settings: {
+        slidesToShow: 1.5,
+      },
+    },
+  ]
 };
 
 const Trending: React.FC<TrendingProps> = ({ data, search }) => {
@@ -32,10 +40,14 @@ const Trending: React.FC<TrendingProps> = ({ data, search }) => {
         {trending.map((item: Movie, index: number) => (
           <TrendingDiv
             className="slick-slide"
-            imageSmall={item.thumbnail.trending?.small || ""}
+            imagesmall={item.thumbnail.trending?.small || ""}
             key={index}
           >
             <BackgroundDiv>
+              <Playcard>
+                <img src="/assets/icon-play.svg" />
+                <Playtext>Play</Playtext>
+              </Playcard>
               <BookMarkDiv
                 onClick={() => {
                   trending[index].isBookmarked = !trending[index].isBookmarked;
@@ -84,32 +96,22 @@ const Title = styled.h1`
   text-align: left;
   color: white;
   margin: 15px 0px;
+  @media screen and (min-width: 768px) {
+    font-size: 32px;
+    line-height: 40.32px;
+    letter-spacing: -0.5px;
+  }
 `;
 
-const TrendingDiv = styled.div<{ imageSmall: string }>`
-  background-image: ${(props) => `url(${props.imageSmall})`};
+const TrendingDiv = styled.div<{ imagesmall: string }>`
+  background-image: ${(props) => `url(${props.imagesmall})`};
   background-repeat: no-repeat;
   aspect-ratio: 16 / 9;
   width: 100%;
   background-size: cover;
   background-position: center;
   border-radius: 10px;
-`;
-
-const BackgroundDiv = styled.div`
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.0001) 40%,
-    rgba(0, 0, 0, 0.75) 100%
-  );
-  width: 100%;
-  height: 100%;
-  padding: 10px 10px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: right;
+  position: relative;
 `;
 
 const BookMarkDiv = styled.div`
@@ -138,7 +140,6 @@ const ItemInfo = styled.div`
   text-align: left;
   display: flex;
   gap: 3px;
-  /* margin-top: 50px; */
 `;
 
 const CategoryImg = styled.img`
@@ -152,6 +153,55 @@ const ItemTitle = styled.h3`
   font-weight: 400;
   line-height: 25px;
   letter-spacing: -0.3125px;
+  text-align: left;
+  color: white;
+`;
+
+const Playcard = styled.div`
+  width: 117px;
+  height: 48px;
+  background: rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 25px;
+  gap: 10px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  position: absolute;
+  top: 45%;
+  left: 40%;
+  cursor: pointer;
+`;
+
+const BackgroundDiv = styled.div`
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.0001) 40%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+  width: 100%;
+  height: 100%;
+  padding: 10px 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: right;
+  &:hover {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  &:hover ${Playcard} {
+    display: flex;
+  }
+`;
+
+const Playtext = styled.p`
+  font-family: "Outfit", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 23px;
+  letter-spacing: 0px;
   text-align: left;
   color: white;
 `;

@@ -59,13 +59,14 @@ export default Searched;
 
 const Search = styled.input`
   margin-top: 20px;
-  margin-left: 10px;
-  width: 257px;
+
+  width: 100%;
   height: 24px;
   background-color: #10141e;
   background-image: url("./assets/icon-search.svg");
   background-size: 24px;
   background-repeat: no-repeat;
+  background-position: left center; 
   border: none;
   padding-left: 40px;
   &:focus,
@@ -78,7 +79,6 @@ const Search = styled.input`
   }
   @media screen and (min-width: 768px) {
     background-position: left;
-    margin-left: 30px;
     width: 381px;
     height: 32px;
     font-size: 24px;
@@ -89,7 +89,6 @@ const Search = styled.input`
   }
 
   @media screen and (min-width: 1040px) {
-    margin-left: 30px;
     margin-top: 45px;
   }
 `;

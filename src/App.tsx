@@ -49,10 +49,22 @@ function App() {
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/home" element={<Home data={movies} search={search}/>} />
-          <Route path="/movies" element={<Movies data={movies} search={search}/>} />
-          <Route path="/tvseries" element={<TvSeries data={movies} search={search}/>} />
-          <Route path="/bookmarks" element={<Bookmarks data={movies} search={search}/>} />
+          <Route
+            path="/home"
+            element={<Home data={movies} search={search} />}
+          />
+          <Route
+            path="/movies"
+            element={<Movies data={movies} search={search} />}
+          />
+          <Route
+            path="/tvseries"
+            element={<TvSeries data={movies} search={search} />}
+          />
+          <Route
+            path="/bookmarks"
+            element={<Bookmarks data={movies} search={search} />}
+          />
         </Routes>
       </Router>
       <GlobalStyles />
@@ -72,4 +84,9 @@ const GlobalStyles = createGlobalStyle`
   }
 body{
   background-color:#10141E;
-  }`;
+  padding: 10px;
+  }
+  @media screen and (min-width: 768px){
+    padding: 20px;
+  }
+  `;
