@@ -1,61 +1,65 @@
 import styled from "styled-components";
-import { useState } from "react";
 import { Movie } from "../App";
 
 interface MoviesProps {
   data: Movie[];
   search: string;
+  setData: React.Dispatch<React.SetStateAction<Movie[]>>;
 }
 
-const Movies: React.FC<MoviesProps> = ({ data, search }) => {
-  const moviesItems = data.filter((item) => item.category == "Movie");
-  const [movies, setMovies] = useState(moviesItems);
+const Movies: React.FC<MoviesProps> = ({ data, search, setData }) => {
   return search == "" ? (
     <>
       <Title>Movies</Title>
       <MoviesItems>
-        {movies.map((item: Movie, index: number) => (
-          <Info_img>
-            <ItemDiv
-              key={index}
-              imageSmall={item.thumbnail.regular.small || ""}
-            >
-              <Hover>
-                <Playcard>
-                  <img src="/assets/icon-play.svg" />
-                  <Playtext>Play</Playtext>
-                </Playcard>
-              </Hover>
-              <BookMarkDiv
-                onClick={() => {
-                  movies[index].isBookmarked = !movies[index].isBookmarked;
-                  setMovies([...movies]);
-                }}
+        {data
+          .filter((item) => item.category == "Movie")
+          .map((item: Movie, index: number) => (
+            <Info_img>
+              <ItemDiv
+                key={index}
+                imageSmall={item.thumbnail.regular.small || ""}
               >
-                <BookMarkImg
+                <Hover>
+                  <Playcard>
+                    <img src="/assets/icon-play.svg" />
+                    <Playtext>Play</Playtext>
+                  </Playcard>
+                </Hover>
+                <BookMarkDiv
+                  onClick={() => {
+                    const findedIndex = data.findIndex(
+                      (item2) => item2.title == item.title
+                    );
+                    data[findedIndex].isBookmarked =
+                      !data[findedIndex].isBookmarked;
+                    setData([...data]);
+                  }}
+                >
+                  <BookMarkImg
+                    src={
+                      item.isBookmarked
+                        ? "./assets/icon-bookmark-full.svg"
+                        : "./assets/icon-bookmark-empty.svg"
+                    }
+                  />
+                </BookMarkDiv>
+              </ItemDiv>
+              <ItemInfo>
+                {item.year} <img src="./assets/Oval.svg" />{" "}
+                <CategoryImg
                   src={
-                    item.isBookmarked
-                      ? "./assets/icon-bookmark-full.svg"
-                      : "./assets/icon-bookmark-empty.svg"
+                    item.category == "Movies"
+                      ? "./assets/icon-category-Movies.svg"
+                      : "./assets/icon-category-tv.svg"
                   }
                 />
-              </BookMarkDiv>
-            </ItemDiv>
-            <ItemInfo>
-              {item.year} <img src="./assets/Oval.svg" />{" "}
-              <CategoryImg
-                src={
-                  item.category == "Movies"
-                    ? "./assets/icon-category-Movies.svg"
-                    : "./assets/icon-category-tv.svg"
-                }
-              />
-              {item.category}
-              <img src="./assets/Oval.svg" /> {item.rating}
-            </ItemInfo>
-            <ItemTitle>{item.title}</ItemTitle>
-          </Info_img>
-        ))}
+                {item.category}
+                <img src="./assets/Oval.svg" /> {item.rating}
+              </ItemInfo>
+              <ItemTitle>{item.title}</ItemTitle>
+            </Info_img>
+          ))}
       </MoviesItems>
     </>
   ) : null;

@@ -6,9 +6,15 @@ interface SearchedProps {
   data: Movie[];
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
+  setData: React.Dispatch<React.SetStateAction<Movie[]>>;
 }
 
-const Searched: React.FC<SearchedProps> = ({ data, search, setSearch }) => {
+const Searched: React.FC<SearchedProps> = ({
+  data,
+  search,
+  setSearch,
+  setData,
+}) => {
   const searchedItems = search
     ? data.filter((item) =>
         item.title.toLowerCase().includes(search.toLowerCase())
@@ -24,30 +30,51 @@ const Searched: React.FC<SearchedProps> = ({ data, search, setSearch }) => {
       />
       {search !== "" ? (
         <>
-          <Title>Found {searchedItems.length} results for '{search}'</Title>
+          <Title>
+            Found {searchedItems.length} results for '{search}'
+          </Title>
           <SearchedItems>
-            {searchedItems.map((item: Movie, index: number) => (
-              <Info_img key={index}>
-                <ItemDiv imageSmall={item.thumbnail?.regular?.small || ""}>
-                  <BookMarkDiv>
-                    <BookMarkImg src="./assets/icon-bookmark-empty.svg" />
-                  </BookMarkDiv>
-                </ItemDiv>
-                <ItemInfo>
-                  {item.year} <img src="./assets/Oval.svg" />{" "}
-                  <CategoryImg
-                    src={
-                      item.category === "Movie"
-                        ? "./assets/icon-category-movie.svg"
-                        : "./assets/icon-category-tv.svg"
-                    }
-                  />
-                  {item.category}
-                  <img src="./assets/Oval.svg" /> {item.rating}
-                </ItemInfo>
-                <ItemTitle>{item.title}</ItemTitle>
-              </Info_img>
-            ))}
+            {data
+              .filter((item) =>
+                item.title.toLowerCase().includes(search.toLowerCase())
+              )
+              .map((item: Movie, index: number) => (
+                <Info_img key={index}>
+                  <ItemDiv imageSmall={item.thumbnail?.regular?.small || ""}>
+                    <BookMarkDiv
+                      onClick={() => {
+                        const findedIndex = data.findIndex(
+                          (item2) => item2.title == item.title
+                        );
+                        data[findedIndex].isBookmarked =
+                          !data[findedIndex].isBookmarked;
+                        setData([...data]);
+                      }}
+                    >
+                      <BookMarkImg
+                        src={
+                          item.isBookmarked
+                            ? "./assets/icon-bookmark-full.svg"
+                            : "./assets/icon-bookmark-empty.svg"
+                        }
+                      />
+                    </BookMarkDiv>
+                  </ItemDiv>
+                  <ItemInfo>
+                    {item.year} <img src="./assets/Oval.svg" />{" "}
+                    <CategoryImg
+                      src={
+                        item.category === "Movie"
+                          ? "./assets/icon-category-movie.svg"
+                          : "./assets/icon-category-tv.svg"
+                      }
+                    />
+                    {item.category}
+                    <img src="./assets/Oval.svg" /> {item.rating}
+                  </ItemInfo>
+                  <ItemTitle>{item.title}</ItemTitle>
+                </Info_img>
+              ))}
           </SearchedItems>
         </>
       ) : null}
@@ -66,7 +93,7 @@ const Search = styled.input`
   background-image: url("./assets/icon-search.svg");
   background-size: 24px;
   background-repeat: no-repeat;
-  background-position: left center; 
+  background-position: left center;
   border: none;
   padding-left: 40px;
   &:focus,

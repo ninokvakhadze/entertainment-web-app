@@ -6,13 +6,14 @@ import Recommended from "./trending-recomended/Recommended";
 interface HomeProps {
   data: Movie[];
   search: string;
+  setData: React.Dispatch<React.SetStateAction<Movie[]>>;
 }
 
-const Home: React.FC<HomeProps> = ({ data, search }) => {
+const Home: React.FC<HomeProps> = ({ data, search, setData }) => {
   return (
     <HomeDiv>
-      <Trending data={data} search={search} />
-      <Recommended data={data} search={search} />
+      <Trending data={data} search={search} setData={setData}/>
+      <Recommended data={data} search={search} setData={setData}/>
     </HomeDiv>
   );
 };

@@ -4,11 +4,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import "./trending.css";
-import { useState } from "react";
 
 interface TrendingProps {
   data: Movie[];
   search: string;
+  setData: React.Dispatch<React.SetStateAction<Movie[]>>;
 }
 
 const settings = {
@@ -28,16 +28,13 @@ const settings = {
   ],
 };
 
-const Trending: React.FC<TrendingProps> = ({ data, search }) => {
-  const trendingItems = data.filter((item) => item.isTrending);
-
-  const [trending, setTrending] = useState(trendingItems);
+const Trending: React.FC<TrendingProps> = ({ data, search , setData }) => {
 
   return search == "" ? (
     <>
       <Title>Trending</Title>
       <Slider {...settings}>
-        {trending.map((item: Movie, index: number) => (
+        {data.filter(item => item.isTrending).map((item: Movie, index: number) => (
           <TrendingDiv
             className="slick-slide"
             imagesmall={item.thumbnail.trending?.small || ""}
@@ -49,9 +46,13 @@ const Trending: React.FC<TrendingProps> = ({ data, search }) => {
                 <Playtext>Play</Playtext>
               </Playcard>
               <BookMarkDiv
-                onClick={() => {
-                  trending[index].isBookmarked = !trending[index].isBookmarked;
-                  setTrending([...trending]);
+                 onClick={() => {
+                  const findedIndex = data.findIndex(
+                    (item2) => item2.title == item.title
+                  );
+                  data[findedIndex].isBookmarked =
+                    !data[findedIndex].isBookmarked;
+                  setData([...data]);
                 }}
               >
                 <BookMarkImg

@@ -1,39 +1,35 @@
 import styled from "styled-components";
 import { Movie } from "../App";
-import { useState } from "react";
 
 interface BookmarksProps {
   data: Movie[];
   search: string;
+  setData: React.Dispatch<React.SetStateAction<Movie[]>>
 }
 
-const Bookmarks: React.FC<BookmarksProps> = ({ data, search }) => {
-  const bookmarksItems = data.filter((item) => item.isBookmarked == true);
-  const [bookmarks, setBookmarks] = useState(bookmarksItems);
+const Bookmarks: React.FC<BookmarksProps> = ({ data, search, setData }) => {
 
   return search == "" ? (
     <>
       <Title>Bookmarked movies</Title>
       <BookmarksItems>
-        {bookmarks
-          .filter((item) => item.category == "Movie")
+        {data
+          .filter((item) => item.category == "Movie" && item.isBookmarked)
           .map((item: Movie, index: number) => (
-            <Info_img>
-              <ItemDiv
-                key={index}
-                imageSmall={item.thumbnail.regular.small || ""}
-              >
+            <Info_img key={index}>
+              <ItemDiv imageSmall={item.thumbnail.regular.small || ""}>
                 <Hover>
-                <Playcard>
-                  <img src="/assets/icon-play.svg" />
-                  <Playtext>Play</Playtext>
-                </Playcard>
-              </Hover>
+                  <Playcard>
+                    <img src="/assets/icon-play.svg" />
+                    <Playtext>Play</Playtext>
+                  </Playcard>
+                </Hover>
                 <BookMarkDiv
                   onClick={() => {
-                    bookmarks[index].isBookmarked =
-                      !bookmarks[index].isBookmarked;
-                    setBookmarks([...bookmarks]);
+                    const findedIndex = data.findIndex(item2 => item2.title == item.title)
+                    data[findedIndex].isBookmarked =
+                      !data[findedIndex].isBookmarked;
+                    setData([...data]);
                   }}
                 >
                   <BookMarkImg
@@ -63,20 +59,17 @@ const Bookmarks: React.FC<BookmarksProps> = ({ data, search }) => {
       </BookmarksItems>
       <Title>Bookmarked Tv Series</Title>
       <BookmarksItems>
-        {bookmarks
-          .filter((item) => item.category != "Movie")
+        {data.filter((item) => item.category != "Movie" && item.isBookmarked)
           .map((item: Movie, index: number) => (
-            <Info_img>
-              <ItemDiv
-                key={index}
-                imageSmall={item.thumbnail.regular.small || ""}
-              >
+            <Info_img key={index}>
+              <ItemDiv imageSmall={item.thumbnail.regular.small || ""}>
                 <BookMarkDiv
-                  onClick={() => {
-                    bookmarks[index].isBookmarked =
-                      !bookmarks[index].isBookmarked;
-                    setBookmarks([...bookmarks]);
-                  }}
+                 onClick={() => {
+                  const findedIndex = data.findIndex(item2 => item2.title == item.title)
+                  data[findedIndex].isBookmarked =
+                    !data[findedIndex].isBookmarked;
+                  setData([...data]);
+                }}
                 >
                   <BookMarkImg
                     src={
@@ -108,7 +101,6 @@ const Bookmarks: React.FC<BookmarksProps> = ({ data, search }) => {
 };
 
 export default Bookmarks;
-
 
 const Title = styled.h1`
   font-family: "Outfit", sans-serif;

@@ -1,69 +1,71 @@
 import styled from "styled-components";
 import { Movie } from "../App";
-import { useState } from "react";
 
 interface TvSeriesProps {
   data: Movie[];
   search: string;
+  setData: React.Dispatch<React.SetStateAction<Movie[]>>;
 }
 
-const TvSeries: React.FC<TvSeriesProps> = ({ data, search }) => {
-  const tvSeriesItems = data.filter((item) => item.category != "Movie");
-  const [tvSeries, setTvSeries] = useState(tvSeriesItems);
-
+const TvSeries: React.FC<TvSeriesProps> = ({ data, search, setData }) => {
   return search == "" ? (
     <>
       <Title>Tv Series</Title>
       <TvSeriesItems>
-        {tvSeries.map((item: Movie, index: number) => (
-          <Info_img>
-            <ItemDiv
-              key={index}
-              imageSmall={item.thumbnail.regular.small || ""}
-            >
-              <Hover>
-                <Playcard>
-                  <img src="/assets/icon-play.svg" />
-                  <Playtext>Play</Playtext>
-                </Playcard>
-              </Hover>
-              <BookMarkDiv
-                onClick={() => {
-                  tvSeries[index].isBookmarked = !tvSeries[index].isBookmarked;
-                  setTvSeries([...tvSeries]);
-                }}
+        {data
+          .filter((item) => item.category != "Movie")
+          .map((item: Movie, index: number) => (
+            <Info_img>
+              <ItemDiv
+                key={index}
+                imageSmall={item.thumbnail.regular.small || ""}
               >
-                <BookMarkImg
+                <Hover>
+                  <Playcard>
+                    <img src="/assets/icon-play.svg" />
+                    <Playtext>Play</Playtext>
+                  </Playcard>
+                </Hover>
+                <BookMarkDiv
+                  onClick={() => {
+                    const findedIndex = data.findIndex(
+                      (item2) => item2.title == item.title
+                    );
+                    data[findedIndex].isBookmarked =
+                      !data[findedIndex].isBookmarked;
+                    setData([...data]);
+                  }}
+                >
+                  <BookMarkImg
+                    src={
+                      item.isBookmarked
+                        ? "./assets/icon-bookmark-full.svg"
+                        : "./assets/icon-bookmark-empty.svg"
+                    }
+                  />
+                </BookMarkDiv>
+              </ItemDiv>
+              <ItemInfo>
+                {item.year} <img src="./assets/Oval.svg" />{" "}
+                <CategoryImg
                   src={
-                    item.isBookmarked
-                      ? "./assets/icon-bookmark-full.svg"
-                      : "./assets/icon-bookmark-empty.svg"
+                    item.category == "TvSeries"
+                      ? "./assets/icon-category-TvSeries.svg"
+                      : "./assets/icon-category-tv.svg"
                   }
                 />
-              </BookMarkDiv>
-            </ItemDiv>
-            <ItemInfo>
-              {item.year} <img src="./assets/Oval.svg" />{" "}
-              <CategoryImg
-                src={
-                  item.category == "TvSeries"
-                    ? "./assets/icon-category-TvSeries.svg"
-                    : "./assets/icon-category-tv.svg"
-                }
-              />
-              {item.category}
-              <img src="./assets/Oval.svg" /> {item.rating}
-            </ItemInfo>
-            <ItemTitle>{item.title}</ItemTitle>
-          </Info_img>
-        ))}
+                {item.category}
+                <img src="./assets/Oval.svg" /> {item.rating}
+              </ItemInfo>
+              <ItemTitle>{item.title}</ItemTitle>
+            </Info_img>
+          ))}
       </TvSeriesItems>
     </>
   ) : null;
 };
 
 export default TvSeries;
-
 
 const Title = styled.h1`
   font-family: "Outfit", sans-serif;

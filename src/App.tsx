@@ -36,34 +36,35 @@ export interface Movie {
   isTrending: boolean;
 }
 
-const movies: Movie[] = JsonData;
+// const movies: Movie[] = JsonData;
 
 function App() {
+  const [movies, setMovies] = useState<Movie[]>(JsonData)
   const [search, setSearch] = useState("");
   return (
     <>
       <Router>
         <Header />
-        <Searched search={search} data={movies} setSearch={setSearch} />
+        <Searched search={search} data={movies} setSearch={setSearch} setData={setMovies}/>
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route
             path="/home"
-            element={<Home data={movies} search={search} />}
+            element={<Home data={movies} search={search} setData={setMovies} />}
           />
           <Route
             path="/movies"
-            element={<Movies data={movies} search={search} />}
+            element={<Movies data={movies} search={search} setData={setMovies} />}
           />
           <Route
             path="/tvseries"
-            element={<TvSeries data={movies} search={search} />}
+            element={<TvSeries data={movies} search={search} setData={setMovies}  />}
           />
           <Route
             path="/bookmarks"
-            element={<Bookmarks data={movies} search={search} />}
+            element={<Bookmarks data={movies} setData={setMovies} search={search} />}
           />
         </Routes>
       </Router>
@@ -85,13 +86,5 @@ const GlobalStyles = createGlobalStyle`
 body{
   background-color:#10141E;
   padding: 10px;
-  }
-
-  @media screen and (min-width: 1024px){
-    body{
-      /* display: flex; */
-    /* align-items: center; */
-    }
-   
   }
   `;

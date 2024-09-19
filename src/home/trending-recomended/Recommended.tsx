@@ -1,20 +1,19 @@
 import styled from "styled-components";
 import { Movie } from "../../App";
-import { useState } from "react";
 
 interface RecommendedProps {
   data: Movie[];
   search: string;
+  setData: React.Dispatch<React.SetStateAction<Movie[]>>;
 }
 
-const Recommended: React.FC<RecommendedProps> = ({ data, search }) => {
-  const recommendedItems = data.filter((item) => item.isTrending != true);
-  const [recommended, setRecommended] = useState(recommendedItems);
+const Recommended: React.FC<RecommendedProps> = ({ data, search, setData }) => {
+
   return search == "" ? (
     <>
       <Title>Recommended</Title>
       <RecommendedItems>
-        {recommended.map((item: Movie, index: number) => (
+        {data.filter(item => !item.isTrending).map((item: Movie, index: number) => (
           <Info_img>
             <ItemDiv
               key={index}
@@ -27,10 +26,13 @@ const Recommended: React.FC<RecommendedProps> = ({ data, search }) => {
                 </Playcard>
               </Hover>
               <BookMarkDiv
-                onClick={() => {
-                  recommended[index].isBookmarked =
-                    !recommended[index].isBookmarked;
-                  setRecommended([...recommended]);
+                 onClick={() => {
+                  const findedIndex = data.findIndex(
+                    (item2) => item2.title == item.title
+                  );
+                  data[findedIndex].isBookmarked =
+                    !data[findedIndex].isBookmarked;
+                  setData([...data]);
                 }}
               >
                 <BookMarkImg
@@ -83,7 +85,7 @@ const RecommendedItems = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 1%;
+  gap: 2%;
   row-gap: 20px;
   width: 100%;
   height: 100%;
