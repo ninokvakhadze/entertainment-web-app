@@ -43,9 +43,6 @@ const SignUpDiv = styled.div`
   display: flex;
   flex-direction: column;
   gap: 25px;
-  @media screen and (min-width: 768px){
-    width: 50%;
-  }
 `;
 
 const Title = styled.h2`

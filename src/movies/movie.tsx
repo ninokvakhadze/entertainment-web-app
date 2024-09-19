@@ -63,7 +63,6 @@ const Movies: React.FC<MoviesProps> = ({ data, search }) => {
 
 export default Movies;
 
-
 const Title = styled.h1`
   font-family: "Outfit", sans-serif;
   font-size: 20px;
@@ -91,6 +90,12 @@ const Info_img = styled.div`
   width: 49%;
   min-width: 164px;
   height: auto;
+  @media screen and (max-width: 374px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 768px) {
+    width: 32%;
+  }
 `;
 const ItemDiv = styled.div<{ imageSmall: string }>`
   background-image: ${(props) => `url(${props.imageSmall})`};
@@ -116,6 +121,7 @@ const BookMarkDiv = styled.div`
   align-items: center;
   border-radius: 16px;
   align-self: flex-end;
+  z-index: 1;
 `;
 const BookMarkImg = styled.img`
   height: 14px;
@@ -159,8 +165,8 @@ const Playcard = styled.div`
   justify-content: center;
   z-index: 1;
   position: absolute;
-  top: 45%;
-  left: 40%;
+  top: 42%;
+  left: 35%;
   cursor: pointer;
 `;
 
@@ -176,7 +182,7 @@ const Playtext = styled.p`
 
 const Hover = styled.div`
   display: none;
-  @media screen and (min-width: 1040px) {
+  @media screen and (min-width: 1024px) {
     display: inline;
     background: rgba(0, 0, 0, 0.5);
     width: 100%;

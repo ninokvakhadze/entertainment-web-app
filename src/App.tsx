@@ -86,7 +86,12 @@ body{
   background-color:#10141E;
   padding: 10px;
   }
-  @media screen and (min-width: 768px){
-    padding: 20px;
+
+  @media screen and (min-width: 1024px){
+    body{
+      /* display: flex; */
+    /* align-items: center; */
+    }
+   
   }
   `;

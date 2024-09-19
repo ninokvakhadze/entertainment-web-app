@@ -20,12 +20,12 @@ const settings = {
   arrows: false,
   responsive: [
     {
-      breakpoint: 1024, 
+      breakpoint: 1024,
       settings: {
         slidesToShow: 1.5,
       },
     },
-  ]
+  ],
 };
 
 const Trending: React.FC<TrendingProps> = ({ data, search }) => {
@@ -188,11 +188,13 @@ const BackgroundDiv = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: right;
-  &:hover {
-    background: rgba(0, 0, 0, 0.5);
-  }
-  &:hover ${Playcard} {
-    display: flex;
+  @media screen and (min-width: 1024px) {
+    &:hover {
+      background: rgba(0, 0, 0, 0.5);
+    }
+    &:hover ${Playcard} {
+      display: flex;
+    }
   }
 `;
 
