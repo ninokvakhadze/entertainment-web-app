@@ -170,8 +170,8 @@ const Playcard = styled.div`
   justify-content: center;
   z-index: 1;
   position: absolute;
-  top: 45%;
-  left: 40%;
+  top: 43%;
+  left: 38%;
   cursor: pointer;
 `;
 

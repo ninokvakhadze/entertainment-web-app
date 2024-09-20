@@ -63,6 +63,12 @@ const Bookmarks: React.FC<BookmarksProps> = ({ data, search, setData }) => {
           .map((item: Movie, index: number) => (
             <Info_img key={index}>
               <ItemDiv imageSmall={item.thumbnail.regular.small || ""}>
+              <Hover>
+                  <Playcard>
+                    <img src="/assets/icon-play.svg" />
+                    <Playtext>Play</Playtext>
+                  </Playcard>
+                </Hover>
                 <BookMarkDiv
                  onClick={() => {
                   const findedIndex = data.findIndex(item2 => item2.title == item.title)
@@ -111,14 +117,22 @@ const Title = styled.h1`
   text-align: left;
   color: white;
   margin: 15px 0px;
+  @media screen and (min-width: 768px) {
+    font-size: 32px;
+    line-height: 40.32px;
+    letter-spacing: -0.5px;
+  }
 `;
 const BookmarksItems = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 1%;
+  gap: 2%;
   row-gap: 20px;
   width: 100%;
+  @media screen and (min-width: 768px) {
+    gap: 1.7%;
+  }
 `;
 
 const Info_img = styled.div`
@@ -134,6 +148,9 @@ const Info_img = styled.div`
   }
   @media screen and (min-width: 768px) {
     width: 32%;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 23.7%;
   }
 `;
 const ItemDiv = styled.div<{ imageSmall: string }>`
@@ -205,8 +222,8 @@ const Playcard = styled.div`
   justify-content: center;
   z-index: 1;
   position: absolute;
-  top: 45%;
-  left: 40%;
+  top: 38%;
+  left: 29%;
   cursor: pointer;
 `;
 

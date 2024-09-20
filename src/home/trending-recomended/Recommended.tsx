@@ -89,7 +89,7 @@ const RecommendedItems = styled.div`
   row-gap: 20px;
   width: 100%;
   height: 100%;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     gap: 1.7%;
   }
 `;
@@ -181,8 +181,8 @@ const Playcard = styled.div`
   justify-content: center;
   z-index: 1;
   position: absolute;
-  top: 42%;
-  left: 35%;
+  top: 38%;
+  left: 29%;
   cursor: pointer;
 `;
 

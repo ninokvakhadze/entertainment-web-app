@@ -10,7 +10,7 @@ function SignUp() {
         <SignUpInput type="text" placeholder="Email address"/>
         <SignUpInput type="password" placeholder="Password"/>
         <SignUpInput type="password" placeholder="Repeat password"/>
-        <Button>SignUp to your account</Button>
+        <Button>Sign Up to your account</Button>
         <Question>
           Don’t have an account?
           <Link style={{ textDecoration: "none" }} to="/login">
@@ -32,6 +32,9 @@ const MainDiv = styled.div`
   align-items: center;
   height: 90vh;
   gap: 40px;
+  @media screen and (min-width: 1024px) {
+    margin-left: -106px;
+  }
 `;
 
 const SignUpDiv = styled.div`

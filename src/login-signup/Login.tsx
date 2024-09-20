@@ -66,6 +66,9 @@ const MainDiv = styled.div`
   align-items: center;
   height: 90vh;
   gap: 40px;
+  @media screen and (min-width: 1024px) {
+    margin-left: -106px;
+  }
 `;
 
 const LoginDiv = styled.div`

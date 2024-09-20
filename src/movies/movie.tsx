@@ -76,14 +76,22 @@ const Title = styled.h1`
   text-align: left;
   color: white;
   margin: 15px 0px;
+  @media screen and (min-width: 768px) {
+    font-size: 32px;
+    line-height: 40.32px;
+    letter-spacing: -0.5px;
+  }
 `;
 const MoviesItems = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 1%;
+  justify-content: flex-start;
+  gap: 2%;
   row-gap: 20px;
   width: 100%;
+  @media screen and (min-width: 768px) {
+    gap: 1.7%;
+  }
 `;
 
 const Info_img = styled.div`
@@ -99,6 +107,9 @@ const Info_img = styled.div`
   }
   @media screen and (min-width: 768px) {
     width: 32%;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 23.7%;
   }
 `;
 const ItemDiv = styled.div<{ imageSmall: string }>`
@@ -169,8 +180,8 @@ const Playcard = styled.div`
   justify-content: center;
   z-index: 1;
   position: absolute;
-  top: 42%;
-  left: 35%;
+  top: 38%;
+  left: 29%;
   cursor: pointer;
 `;
 

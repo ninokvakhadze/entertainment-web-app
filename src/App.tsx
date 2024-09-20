@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, styled } from "styled-components";
 import Header from "./header/header";
 import Login from "./login-signup/Login";
 import SignUp from "./login-signup/SignUp";
@@ -39,34 +39,49 @@ export interface Movie {
 // const movies: Movie[] = JsonData;
 
 function App() {
-  const [movies, setMovies] = useState<Movie[]>(JsonData)
+  const [movies, setMovies] = useState<Movie[]>(JsonData);
   const [search, setSearch] = useState("");
   return (
     <>
       <Router>
         <Header />
-        <Searched search={search} data={movies} setSearch={setSearch} setData={setMovies}/>
-        <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route
-            path="/home"
-            element={<Home data={movies} search={search} setData={setMovies} />}
+        <MainDiv>
+          <Searched
+            search={search}
+            data={movies}
+            setSearch={setSearch}
+            setData={setMovies}
           />
-          <Route
-            path="/movies"
-            element={<Movies data={movies} search={search} setData={setMovies} />}
-          />
-          <Route
-            path="/tvseries"
-            element={<TvSeries data={movies} search={search} setData={setMovies}  />}
-          />
-          <Route
-            path="/bookmarks"
-            element={<Bookmarks data={movies} setData={setMovies} search={search} />}
-          />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route
+              path="/home"
+              element={
+                <Home data={movies} search={search} setData={setMovies} />
+              }
+            />
+            <Route
+              path="/movies"
+              element={
+                <Movies data={movies} search={search} setData={setMovies} />
+              }
+            />
+            <Route
+              path="/tvseries"
+              element={
+                <TvSeries data={movies} search={search} setData={setMovies} />
+              }
+            />
+            <Route
+              path="/bookmarks"
+              element={
+                <Bookmarks data={movies} setData={setMovies} search={search} />
+              }
+            />
+          </Routes>
+        </MainDiv>
       </Router>
       <GlobalStyles />
     </>
@@ -88,3 +103,11 @@ body{
   padding: 10px;
   }
   `;
+const MainDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media screen and (min-width: 1024px) {
+    margin-left: 106px;
+  }
+`;
