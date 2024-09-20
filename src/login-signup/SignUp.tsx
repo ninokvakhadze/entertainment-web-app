@@ -7,9 +7,9 @@ function SignUp() {
       <img src="./assets/logo.svg" />
       <SignUpDiv>
         <Title>Sign Up</Title>
-        <SignUpInput type="text" placeholder="Email address"/>
-        <SignUpInput type="password" placeholder="Password"/>
-        <SignUpInput type="password" placeholder="Repeat password"/>
+        <SignUpInput type="text" placeholder="Email address" />
+        <SignUpInput type="password" placeholder="Password" />
+        <SignUpInput type="password" placeholder="Repeat password" />
         <Button>Sign Up to your account</Button>
         <Question>
           Don’t have an account?
@@ -46,6 +46,9 @@ const SignUpDiv = styled.div`
   display: flex;
   flex-direction: column;
   gap: 25px;
+  @media screen and (min-width: 1024px) {
+    width: 30%;
+  }
 `;
 
 const Title = styled.h2`
@@ -91,7 +94,7 @@ const SignUpInput = styled.input`
 
 const Button = styled.button`
   background-color: #fc4747;
-  width: 279px;
+  width: 100%;
   height: 48px;
   border: none;
   border-radius: 10px;

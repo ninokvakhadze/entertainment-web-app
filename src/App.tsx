@@ -46,41 +46,39 @@ function App() {
       <Router>
         <Header />
         <MainDiv>
-          <Searched
-            search={search}
-            data={movies}
-            setSearch={setSearch}
-            setData={setMovies}
+        <Searched
+          search={search}
+          data={movies}
+          setSearch={setSearch}
+          setData={setMovies}
+        />
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route
+            path="/home"
+            element={<Home data={movies} search={search} setData={setMovies} />}
           />
-          <Routes>
-            <Route path="/" element={<Navigate to="/login" />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route
-              path="/home"
-              element={
-                <Home data={movies} search={search} setData={setMovies} />
-              }
-            />
-            <Route
-              path="/movies"
-              element={
-                <Movies data={movies} search={search} setData={setMovies} />
-              }
-            />
-            <Route
-              path="/tvseries"
-              element={
-                <TvSeries data={movies} search={search} setData={setMovies} />
-              }
-            />
-            <Route
-              path="/bookmarks"
-              element={
-                <Bookmarks data={movies} setData={setMovies} search={search} />
-              }
-            />
-          </Routes>
+          <Route
+            path="/movies"
+            element={
+              <Movies data={movies} search={search} setData={setMovies} />
+            }
+          />
+          <Route
+            path="/tvseries"
+            element={
+              <TvSeries data={movies} search={search} setData={setMovies} />
+            }
+          />
+          <Route
+            path="/bookmarks"
+            element={
+              <Bookmarks data={movies} setData={setMovies} search={search} />
+            }
+          />
+        </Routes>
         </MainDiv>
       </Router>
       <GlobalStyles />
@@ -104,10 +102,7 @@ body{
   }
   `;
 const MainDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  @media screen and (min-width: 1024px) {
+   @media screen and (min-width: 1024px) {
     margin-left: 106px;
   }
-`;
+`

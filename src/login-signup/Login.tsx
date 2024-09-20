@@ -80,6 +80,9 @@ const LoginDiv = styled.div`
   display: flex;
   flex-direction: column;
   gap: 25px;
+  @media screen and (min-width: 1024px) {
+    width: 30%;
+  }
 `;
 
 const Title = styled.h2`
@@ -125,7 +128,7 @@ const LoginInput = styled.input`
 
 const Button = styled.button`
   background-color: #fc4747;
-  width: 279px;
+  width: 100%;
   height: 48px;
   border: none;
   border-radius: 10px;
